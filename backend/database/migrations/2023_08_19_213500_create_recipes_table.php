@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('cuisine');
             $table->mediumtext('ingredients');
             $table->string('pic_url');
-            $table->int('likes');
+            $table->integer('likes');
             $table->smallInteger('rating',false, true);
             $table->timestamps();
         });
