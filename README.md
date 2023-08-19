@@ -3,8 +3,7 @@ This project is an educational web application built with React and the Laravel 
 
 ## Features
 - - - -
-### *Recipe Sharing:
--------------
+### * Recipe Sharing:
 Users can create an account, post their own recipes, and share them with the community. They can include details such as ingredients, cooking instructions, and images to make their recipes visually appealing.
 
 ### *Meal Planning: ### he app offers a convenient meal planning feature that allows users to organize their weekly or monthly meals. Users can create meal plans, add recipes to specific days, and even generate shopping lists based on their meal selections.
