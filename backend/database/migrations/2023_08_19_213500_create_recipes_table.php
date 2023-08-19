@@ -19,6 +19,7 @@ return new class extends Migration
             $table->mediumtext('ingredients');
             $table->string('pic_url');
             $table->int('likes');
+            $table->smallInteger('rating',false, true);
             $table->timestamps();
         });
     }
