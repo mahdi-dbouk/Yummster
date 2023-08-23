@@ -9,6 +9,14 @@ use App\Models\User;
 class AuthController extends Controller
 {
 
+
+    public function unauthorized(){
+        return response()->json([
+            'status' => 'failed',
+            'reason' => 'unauthorized user',
+        ], 403);
+    }
+    
     public function login(Request $request)
     {
         $request->validate([
@@ -28,7 +36,7 @@ class AuthController extends Controller
         $user = Auth::user();
         return response()->json([
                 'status' => 'success',
-                'user' => $user,
+                'user' => $user->makeHidden(['recipes']),
                 'authorisation' => [
                     'token' => $token,
                     'type' => 'bearer',
@@ -39,13 +47,15 @@ class AuthController extends Controller
 
     public function register(Request $request){
         $request->validate([
-            'name' => 'required|string|max:255',
+            'first_name' => 'required|string|max:255',
+            'last_name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users',
             'password' => 'required|string|min:6',
         ]);
 
         $user = User::create([
-            'name' => $request->name,
+            'first_name' => $request->first_name,
+            'last_name' => $request->last_name,
             'email' => $request->email,
             'password' => Hash::make($request->password),
         ]);
@@ -54,7 +64,7 @@ class AuthController extends Controller
         return response()->json([
             'status' => 'success',
             'message' => 'User created successfully',
-            'user' => $user,
+            'user' => $user->makeHidden(['recipes']),
             'authorisation' => [
                 'token' => $token,
                 'type' => 'bearer',
