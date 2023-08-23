@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('recipe_id');
-            $table->mediumText('conent');
+            $table->mediumText('content');
             $table->timestamps();
         });
     }
