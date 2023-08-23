@@ -16,11 +16,14 @@ return new class extends Migration
             $table->unsignedBigInteger('user_id');
             $table->string('name');
             $table->string('cuisine');
-            $table->mediumtext('ingredients');
-            $table->string('pic_url');
             $table->integer('likes');
-            $table->smallInteger('rating',false, true);
             $table->timestamps();
+        });
+
+        Schema::create('ingredients', function (Blueprint $table) {
+            $table->id();
+            $table->unsignedBigInteger('recipe_id');
+            $table->string('name');
         });
     }
 
@@ -30,5 +33,7 @@ return new class extends Migration
     public function down(): void
     {
         Schema::dropIfExists('recipes');
+        Schema::dropIfExists('ingredients');
+        Schema::dropIfExists('recipe-ingredients');
     }
 };
