@@ -11,11 +11,16 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('grocery_lists', function (Blueprint $table) {
+        Schema::create('grocery-lists', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('user_id');
-            $table->mediumText('content');
             $table->timestamps();
+        });
+
+        Schema::create('grocery-items', function (Blueprint $table) {
+            $table->id();
+            $table->unsignedBigInteger('grocerylist_id');
+            $table->string('name');
         });
     }
 
@@ -24,6 +29,8 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('grocery_lists');
+        Schema::dropIfExists('grocerylists');
+        Schema::dropIfExists('groceryitems');
+        Schema::dropIfExists('grocerylist-groceryitems');
     }
 };
