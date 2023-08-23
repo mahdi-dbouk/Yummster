@@ -8,6 +8,8 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 use PHPOpenSourceSaver\JWTAuth\Contracts\JWTSubject;
+use Illuminate\Database\Eloquent\Relations;
+
 
 class User extends Authenticatable implements JWTSubject
 {
@@ -44,6 +46,36 @@ class User extends Authenticatable implements JWTSubject
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
+
+    //for custom attributes
+    protected $appends = [
+        'full_name',
+        'recipes',
+    ];
+
+    public function recipes(){
+        return $this->hasMany(Recipe::class);
+    }
+
+    public function plans(){
+        return $this->hasMany(Plan::class);
+    }
+
+    public function groceryLists(){
+        return $this->hasMany(GroceryList::class);
+    }
+
+    public function comments(){
+        return $this->hasMany(Comment::class);
+    }
+
+    public function getFullNameAttribute(){
+        return $this->first_name.' '.$this->last_name;
+    }
+
+    public function getRecipesAttribute(){
+        return $this->recipes()->paginate(3);
+    }
 
     public function getJWTIdentifier()
     {
