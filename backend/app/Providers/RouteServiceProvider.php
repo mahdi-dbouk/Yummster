@@ -28,6 +28,14 @@ class RouteServiceProvider extends ServiceProvider
             return Limit::perMinute(60)->by($request->user()?->id ?: $request->ip());
         });
 
+        //limiting number of login attempts
+        RateLimiter::for('login', function (Request $request) {
+            return Limit::perMinute(5)->by($request->user()?->id ?: $request->ip())
+            ->response(function() {
+                return response()->json(['error' => 'Too many login attempts. Please try again later.'], 429);
+            });
+        });
+
         $this->routes(function () {
             Route::middleware('api')
                 ->prefix('api')
