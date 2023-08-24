@@ -11,6 +11,9 @@
 # production
 /build
 
+#personal todo list
+/frontend.tasks
+
 # misc
 .DS_Store
 .env.local
