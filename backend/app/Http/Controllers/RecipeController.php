@@ -95,6 +95,18 @@ class RecipeController extends Controller
 
         ], 200);
     }
+    public function getAllRecipes(){
+        
+        $recipes = Recipe::get();
+        $shuffled_recipes = $recipes->shuffle();
+
+        return response()->json([
+
+            'status' => 'success',
+            'recipe' => $shuffled_recipes,
+
+        ], 200);
+    }
 
     public function search($search_query){
         $search_query_keywords = explode(' ', $search_query);

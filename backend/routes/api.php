@@ -29,6 +29,7 @@ Route::group(['middleware' => 'auth:api'], function(){
     Route::post('rate', [RecipeController::class, 'rate']);
     Route::get('profile/{id}',[UserController::class, 'getProfile']);
     Route::get('recipe/{id}', [RecipeController::class, 'getRecipe']);
+    Route::get('all-recipes', [RecipeController::class, 'getAllRecipes']);
     Route::get('search/{search_query}', [RecipeController::class, 'search']);
     Route::post('refresh', [AuthController::class, 'refresh']);
     Route::get('logout', [AuthController::class, 'logout']);
