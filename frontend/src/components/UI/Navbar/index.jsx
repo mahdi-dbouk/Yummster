@@ -19,20 +19,8 @@ const Navbar = () => {
     console.log(auth);
     console.log(isLoggedIn);
 
-    const handleClick = async () => {
-        const response = await axios.post('http://127.0.0.1:8000/api/login', {
-            email: 'mahdi@gmail.com',
-            password: 'password'
-        });
-        setAuth({
-            email: response?.data?.user.email,
-            fullName: response?.data?.user.full_name,
-            accessToken: response?.data?.authorisation.token,
-            refreshToken: ''
-        });
-        setIsLoggedIn(true);
-
-        navigate('/feed', {replace: true});
+    const handleClick = () => {
+        navigate('/signup', {replace:true});
     }
 
     const handleLogout = async () => {
@@ -77,7 +65,7 @@ const Navbar = () => {
         <div>
             <Button
             
-                text={'SIGNUP'}
+                text={'SIGNUP TODAY!'}
                 style={'w-40 h-10 bg-red-500 hover:bg-red-600 active:bg-red-700 text-white font-bold rounded-md'}
                 action={()=>handleClick()}
             
